@@ -42,6 +42,7 @@
         BinaryPrecedence,
         SourceNode,
         estraverse,
+        entraverse,
         esutils,
         isArray,
         base,
@@ -66,6 +67,7 @@
         FORMAT_DEFAULTS;
 
     estraverse = require('estraverse');
+    entraverse = require('entraverse');
     esutils = require('esutils');
 
     Syntax = estraverse.Syntax;
@@ -2479,6 +2481,13 @@
             if (typeof options.indent === 'string') {
                 defaultOptions.format.indent.style = options.indent;
             }
+
+            if (typeof options.enumerate === 'boolean' && options.enumerate) {
+                Syntax = entraverse.Syntax;
+            } else {
+                Syntax = estraverse.Syntax;
+            }
+
             if (typeof options.base === 'number') {
                 defaultOptions.format.indent.base = options.base;
             }
