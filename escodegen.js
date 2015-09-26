@@ -2486,6 +2486,15 @@
 
             if (typeof options.enumerate === 'boolean' && options.enumerate) {
                 Syntax = entraverse.Syntax;
+                Object.keys(CodeGenerator.Statement).forEach(function (key) {
+                    CodeGenerator.Statement[Syntax[key]] = CodeGenerator.Statement[key];
+                });
+                merge(CodeGenerator.prototype, CodeGenerator.Statement);
+
+                Object.keys(CodeGenerator.Expression).forEach(function (key) {
+                    CodeGenerator.Expression[Syntax[key]] = CodeGenerator.Expression[key];
+                });
+                merge(CodeGenerator.prototype, CodeGenerator.Expression);
             } else {
                 Syntax = estraverse.Syntax;
             }
